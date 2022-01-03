@@ -27,46 +27,34 @@ async def drive(event, msg):
     link = msg.media.webpage.url
     if 'folder' in link:
         try:
-            folder = drive_folder_download(link)
+            output = drive_folder_download(link)
         except Exception as e:
             print(e)
             return await edit.edit(f"An error [`{e}`] occured while Downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-        await upload_folder(folder, event, edit) 
+        folder.append(output)
     elif 'folders' in link:
         try:
-            folder = drive_folder_download(link)
+            output = drive_folder_download(link)
         except Exception as e:
             print(e)
             return await edit.edit(f"An error [`{e}`] occured while Downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-        await upload_folder(folder, event, edit) 
+        folder.append(output) 
     elif 'https://drive.google.com/file/' in link:
         id = (link.split("/"))[5]
         _link = f'https://drive.google.com/uc?id={id}'
         try:
             file = gdown.download(_link, quiet=True)
-            try:
-                uploader = await fast_upload(f'{file}', f'{file}', time.time(), event.client, edit, f'**UPLOADING FILE:**')
-                await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
-            except Exception as e:
-                print(e)
-                return await edit.edit(f"An error [`{e}`] occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         except Exception as e:
             print(e)
             return await edit.edit(f"An error [`{e}`] occured while Downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-        os.remove('file')
+        folder.append(file)
     elif 'https://drive.google.com/uc?id=' in link:
         try:
             file = gdown.download(link, quiet=True)
-            try:
-                uploader = await fast_upload(f'{file}', f'{file}', time.time(), event.client, edit, f'**UPLOADING FILE:**')
-                await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
-            except Exception as e:
-                print(e)
-                return await edit.edit(f"An error [`{e}`] occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         except Exception as e:
             print(e)
             return await edit.edit(f"An error [`{e}`] occured while Downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-        os.remove('file')
+       
         
         
         
