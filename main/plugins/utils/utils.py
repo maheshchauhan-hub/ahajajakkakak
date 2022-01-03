@@ -2,7 +2,7 @@
 #Github.com/Vasusen-code
 
 import time
-from main.__int__ import BOT_UN
+from ... import BOT_UN
 from telethon import events
 from ethon.telefunc import fast_upload
 from telethon.tl.types import DocumentAttributeVideo
