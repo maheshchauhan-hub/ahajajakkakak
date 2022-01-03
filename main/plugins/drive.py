@@ -13,6 +13,7 @@ from ethon.telefunc import fast_upload
 from ethon.pyfunc import bash
 from LOCAL.localisation import SUPPORT_LINK
 from telethon.tl.types import MessageMediaWebPage
+from main.plugins.main import get_link
 
 #to upload files from drive folder 
 #returns downloaded files path as a list
@@ -28,7 +29,7 @@ async def drive(event, msg):
     folder = []
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
-    link = msg.media.webpage.url
+    link = get_link(msg.text)
     if 'folder' in link:
         try:
             output = drive_folder_download(link)
