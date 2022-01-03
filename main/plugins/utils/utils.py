@@ -2,6 +2,7 @@
 #Github.com/Vasusen-code
 
 import re
+import os
 import time
 from ... import BOT_UN
 from telethon import events
@@ -47,15 +48,15 @@ async def upload_folder(folder, event, edit):
             if extension in video_mimes:
                 result = await upload_video(folder[i], event, edit) 
                 if result is False:
-                    uploader = await fast_upload(f'{folder[i]}', f'{folder[i]}', time.time(), event.client, edit, f'**UPLOADING FILE:**')
+                    uploader = await fast_upload(folder[i], folder[i], time.time(), event.client, edit, f'**UPLOADING FILE:**')
                     await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
             else:
-                uploader = await fast_upload(f'{folder[i]}', f'{folder[i]}', time.time(), event.client, edit, f'**UPLOADING FILE:**')
+                uploader = await fast_upload(folder[i], folder[i], time.time(), event.client, edit, f'**UPLOADING FILE:**')
                 await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
             os.remove(folder[i])
         except Exception as e:
             print(e)
-            return await edit.edit(f"An error [`{e}`] occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+            return await edit.edit(f"An error `[{e}]` occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         folder.pop(i)
         
 #to get the url from event
