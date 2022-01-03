@@ -13,7 +13,7 @@ from ethon.telefunc import fast_upload
 from ethon.pyfunc import bash
 from LOCAL.localisation import SUPPORT_LINK
 from telethon.tl.types import MessageMediaWebPage
-from main.plugins.main import get_link
+from main.plugins.utils.utils import get_link
 
 #to upload files from drive folder 
 #returns downloaded files path as a list
