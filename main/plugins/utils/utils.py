@@ -58,8 +58,9 @@ async def upload_folder(folder, event, edit):
         except Exception as e:
             print(e)
             return await edit.edit(f"An error `[{e}]` occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+        await edit.delete()
         folder.pop(i)
-        
+       
 #to get the url from event
 def get_link(string):
     regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
