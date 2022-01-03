@@ -6,20 +6,22 @@ import os
 import time
 import gdown
 import asyncio
-import subprocess
 from datetime import datetime as dt
 from .. import Drone, BOT_UN
 from telethon import events
-from ethon.telefunc import fast_download, fast_upload
-from ethon.pyfunc import video_metadata, bash
+from ethon.telefunc import fast_upload
+from ethon.pyfunc import bash
 from LOCAL.localisation import SUPPORT_LINK
-from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import MessageMediaWebPage
 
+#to upload files from drive folder 
+#returns downloaded files path as a list
 def drive_folder_download(url):
     output = gdown.download_folder(url, quiet=True)
     return output
 
+#uploads a folder 
+#Note:Here is folder is a list of all contents in a folder
 async def upload_folder(folder, event, edit):
     text = f'**UPLOADED by:** {BOT_UN}'
     index = len(folder)
