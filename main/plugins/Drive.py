@@ -11,9 +11,8 @@ from datetime import datetime as dt
 from .. import Drone, BOT_UN
 from telethon import events
 from ethon.telefunc import fast_download, fast_upload
-from ethon.pyfunc import video_metadata
+from ethon.pyfunc import video_metadata, bash
 from LOCAL.localisation import SUPPORT_LINK
-from LOCAL.utils import subprocess_progress
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import MessageMediaWebPage
 
@@ -32,9 +31,8 @@ async def compress(event, msg):
         _link = f'https://drive.google.com/uc?id={x}'
         cmd = f'gdown {_link} -o {output}'
     try:
-        FT = time.time()
-        progress = f"progress-{FT}.txt"
-        await subprocess_progress(cmd, progress, FT, edit, '**DOWNLOADING:**')
+        await edit.edit("Downloading.")
+        bash(cmd)
     except Exception as e:
         print(e)
         return await edit.edit(f"An error [`{e}`] occured while Downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)  
