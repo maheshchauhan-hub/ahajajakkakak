@@ -2,10 +2,8 @@ from yt_dlp import YoutubeDL
 
 #logging-------------------------------------------------------------------------------------------
 
-class MyLogger:
+class YTLogger:
     def debug(self, msg):
-        # For compatibility with youtube-dl, both debug and info are passed into debug
-        # You can distinguish them by the prefix '[debug] '
         if msg.startswith('[debug] '):
             pass
         else:
@@ -22,7 +20,7 @@ class MyLogger:
         
 #----------------------------------------------------------------------------------------------------------
 
-ydlp_opts={'logger': MyLogger(),
+ydlp_opts={'logger': YTLogger(),
           'outtmpl': '%(title)s.%(ext)s',
           'no_warnings': True, 
           'progress_hooks': [my_hook],
