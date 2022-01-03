@@ -54,7 +54,7 @@ async def drive(event, msg):
         except Exception as e:
             print(e)
             return await edit.edit(f"An error [`{e}`] occured while Downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-       
+        folder.append(file)
         
         
         
