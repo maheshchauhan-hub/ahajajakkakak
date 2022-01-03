@@ -33,7 +33,7 @@ async def force_sub(id):
 
 #Database command handling--------------------------------------------------------------------------
 
-db = Database(MONGODB_URI, 'videoconvertor')
+db = Database(MONGODB_URI, 'uploaderpro')
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def incomming(event):
