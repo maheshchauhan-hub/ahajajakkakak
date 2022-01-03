@@ -13,7 +13,7 @@ async def u(event):
     if link is False:
         return
     if 'drive.google.com' in link: 
-        await event.send_message(event.chat_id, file=link_animated, reply_to=event.id, buttons=[[Button.inline("Upload.", data="drive")]])
+        await event.client.send_message(event.chat_id, file=link_animated, reply_to=event.id, buttons=[[Button.inline("Upload.", data="drive")]])
         
 @Drone.on(events.callbackquery.CallbackQuery(data="drive"))
 async def d(event):
