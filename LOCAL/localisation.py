@@ -17,4 +17,6 @@ DEV = "https://t.me/MaheshChauhan"
 
 spam_notice = "This bot is hosted on heroku, and hence can run just one process at a time.Spamming the bot or encoding adult videos will lead you to a ban."
 
+down_sticker = './LOCAL/downloading.tgs'
 
+link_sticker = './LOCAL/link_animated.tgs'
