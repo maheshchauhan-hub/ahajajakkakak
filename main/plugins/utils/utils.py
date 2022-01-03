@@ -10,7 +10,7 @@ from telethon.tl.types import DocumentAttributeVideo
 from ethon.pyutils import file_extension
 from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK
-#---------------------------------------------------------
+#---------------------------------------------------------------------------------
 
 video_mimes = ['mp4',
                'mkv', 
@@ -35,10 +35,10 @@ async def upload_video(file, event, edit):
     except Exception:
         False    
 
-    
 #uploads a folder 
 #Note:Here folder is a list of all contents in a folder
 async def upload_folder(folder, event, edit):
+    Drone = event.client
     text = f'**UPLOADED by:** {BOT_UN}'
     index = len(folder)
     for i in range(int(index)):
