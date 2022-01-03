@@ -8,7 +8,7 @@ from telethon.tl.types import MessageMediaWebPage
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def u(event):
-    if not hasattr(event.media, "webpage")
+    if not hasattr(event.media, "webpage"):
         return
     if 'drive.google.com' in event.media.webpage.url: 
         await event.reply('.', buttons=[[Button.inline("Upload.", data="drive")]])
