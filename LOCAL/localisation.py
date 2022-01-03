@@ -19,4 +19,4 @@ spam_notice = "This bot is hosted on heroku, and hence can run just one process 
 
 down_sticker = './LOCAL/downloading.tgs'
 
-link_sticker = './LOCAL/link_animated.tgs'
+link_animated = './LOCAL/link_animated.tgs'
