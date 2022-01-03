@@ -36,15 +36,19 @@ async def drive(event, msg):
             output = drive_folder_download(link)
         except Exception as e:
             print(e)
-            return await error(edit, e, 'downloading') 
-        folder.append(output)
+            return await error(edit, e, 'downloading')
+        index = len(output)
+        for i in range(int(index)):
+            folder.append((output)[i])
     elif 'folders' in link:
         try:
             output = drive_folder_download(link)
         except Exception as e:
             print(e)
             return await error(edit, e, 'downloading') 
-        folder.append(output) 
+        index = len(output)
+        for i in range(int(index)):
+            folder.append((output)[i])
     elif 'https://drive.google.com/file/' in link:
         id = (link.split("/"))[5]
         _link = f'https://drive.google.com/uc?id={id}'
