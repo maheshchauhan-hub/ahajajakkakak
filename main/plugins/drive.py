@@ -23,7 +23,7 @@ def drive_folder_download(url):
 
 #makes error handling handy
 async def error(event, error, ps):
-    await event.edit(f"An error [`{error}`] occured while {ps}.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)        
+    return await event.edit(f"An error [`{error}`] occured while {ps}.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)        
     
 async def drive(event, msg):
     folder = []
@@ -65,6 +65,14 @@ async def drive(event, msg):
     elif 'https://drive.google.com/uc?id=' in link:
         try:
             file = gdown.download(link, quiet=True)
+        except Exception as e:
+            print(e)
+            return await error(edit, e, 'downloading') 
+        folder.append(file)
+    elif 'id=' in link:
+        try:
+            _link = f'https://drive.google.com/uc?id={(link.split('id='))[1]}'
+            file = gdown.download(_link, quiet=True)
         except Exception as e:
             print(e)
             return await error(edit, e, 'downloading') 
