@@ -11,7 +11,7 @@ from .. import Drone, BOT_UN
 from telethon import events
 from ethon.telefunc import fast_upload
 from ethon.pyfunc import bash
-from LOCAL.localisation import SUPPORT_LINK
+from LOCAL.localisation import SUPPORT_LINK, down_sticker
 from telethon.tl.types import MessageMediaWebPage
 from main.plugins.utils.utils import get_link, upload_folder
 
@@ -26,19 +26,22 @@ async def error(event, error, ps):
     return await event.edit(f"An error [`{error}`] occured while {ps}.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)        
     
 async def drive(event, msg):
-    await event.delete()
     folder = []
     Drone = event.client
-    edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
+    await event.edit("Trying to process.")
     link = get_link(msg.text)
-    await edit.edit("Downloading")
+    await event.delete()
+    ds = await Drone.send_file(event.chat_id, file=down_sticker, reply_to=msg.id)
+    edit = await Drone.send_message(event.chat_id, "**DOWNLOADING**", reply_to=msg.id)
     if 'folder' in link:
         try:
             output = drive_folder_download(link)
         except Exception as e:
             print(e)
+            await ds.delete()
             return await error(edit, e, 'downloading')
         if output is None:
+            await ds.delete()
             return await edit.edit("Could not Download!")
         index = len(output)
         for i in range(int(index)):
@@ -48,8 +51,10 @@ async def drive(event, msg):
             output = drive_folder_download(link)
         except Exception as e:
             print(e)
+            await ds.delete()
             return await error(edit, e, 'downloading') 
         if output is None:
+            await ds.delete()
             return await edit.edit("Could not Download!")
         index = len(output)
         for i in range(int(index)):
@@ -60,6 +65,7 @@ async def drive(event, msg):
         try:
             file = gdown.download(_link, quiet=True)
         except Exception as e:
+            await ds.delete()
             print(e)
             return await error(edit, e, 'downloading') 
         folder.append(file)
@@ -68,6 +74,7 @@ async def drive(event, msg):
             file = gdown.download(link, quiet=True)
         except Exception as e:
             print(e)
+            await ds.delete()
             return await error(edit, e, 'downloading') 
         folder.append(file)
     elif 'id=' in link:
@@ -76,10 +83,13 @@ async def drive(event, msg):
             file = gdown.download(_link, quiet=True)
         except Exception as e:
             print(e)
+            await ds.delete()
             return await error(edit, e, 'downloading') 
         folder.append(file)
     else:
+        await ds.delete()
         return await edit.edit(f'Link support not added.\n\ncontact [SUPPORT]({SUPPORT_LINK})', link_preview=False)
+    await ds.delete()
     await upload_folder(folder, event, edit) 
     await edit.delete()
     
