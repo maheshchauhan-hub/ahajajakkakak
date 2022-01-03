@@ -89,5 +89,4 @@ async def drive(event, msg):
         return await edit.edit(f'Link support not added.\n\ncontact [SUPPORT]({SUPPORT_LINK})', link_preview=False)
     await ds.delete()
     await upload_folder(folder, event, edit) 
-    await edit.delete()
     
