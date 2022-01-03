@@ -37,6 +37,8 @@ async def drive(event, msg):
         except Exception as e:
             print(e)
             return await error(edit, e, 'downloading')
+        if output is None:
+            return await edit.edit("Could not Download!")
         index = len(output)
         for i in range(int(index)):
             folder.append((output)[i])
@@ -46,6 +48,8 @@ async def drive(event, msg):
         except Exception as e:
             print(e)
             return await error(edit, e, 'downloading') 
+        if output is None:
+            return await edit.edit("Could not Download!")
         index = len(output)
         for i in range(int(index)):
             folder.append((output)[i])
