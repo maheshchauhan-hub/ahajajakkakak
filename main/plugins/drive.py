@@ -28,9 +28,7 @@ async def error(event, error, ps):
 async def drive(event, msg):
     folder = []
     Drone = event.client
-    await event.edit("Trying to process.")
     link = get_link(msg.text)
-    await event.delete()
     ds = await Drone.send_file(event.chat_id, file=down_sticker, reply_to=msg.id)
     edit = await Drone.send_message(event.chat_id, "**DOWNLOADING**", reply_to=msg.id)
     if 'folder' in link:
