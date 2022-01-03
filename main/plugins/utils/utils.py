@@ -44,16 +44,17 @@ async def upload_folder(folder, event, edit):
     index = len(folder)
     for i in range(int(index)):
         try:
-            extension = file_extension(folder[i])
+            file = folder[int(i)]
+            extension = file_extension(file)
             if extension in video_mimes:
-                result = await upload_video(folder[i], event, edit) 
+                result = await upload_video(file, event, edit) 
                 if result is False:
-                    uploader = await fast_upload(folder[i], folder[i], time.time(), event.client, edit, f'**UPLOADING FILE:**')
+                    uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE:**')
                     await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
             else:
-                uploader = await fast_upload(folder[i], folder[i], time.time(), event.client, edit, f'**UPLOADING FILE:**')
+                uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE:**')
                 await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
-            os.remove(folder[i])
+            os.remove(file)
         except Exception as e:
             print(e)
             return await edit.edit(f"An error `[{e}]` occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
