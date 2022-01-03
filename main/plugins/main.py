@@ -5,7 +5,7 @@ from .. import Drone
 from telethon import events, Button
 from main.plugins.drive import drive
 from main.plugins.utils.utils import get_link
-from LOCLA.localisation import link_animated
+from LOCAL.localisation import link_animated
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def u(event):
