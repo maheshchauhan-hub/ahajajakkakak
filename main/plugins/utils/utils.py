@@ -1,9 +1,14 @@
+#Tg:ChauhanMahesh/DroneBots
+#Github.com/Vasusen-code
+
 import time
 from main.__int__ import BOT_UN
 from telethon import events
 from ethon.telefunc import fast_upload
 from telethon.tl.types import DocumentAttributeVideo
 from ethon.pyutils import file_extension
+from LOCAL.localisation import SUPPORT_LINK
+#---------------------------------------------------------
 
 video_mimes = ['mp4',
                'mkv', 
