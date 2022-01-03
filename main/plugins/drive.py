@@ -20,6 +20,10 @@ def drive_folder_download(url):
     output = gdown.download_folder(url, quiet=True)
     return output
 
+#makes error handling handy
+async def error(event, error, ps):
+    await event.edit(f"An error [`{error}`] occured while {ps}.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)        
+    
 async def drive(event, msg):
     cmd = ""
     Drone = event.client
@@ -30,14 +34,14 @@ async def drive(event, msg):
             output = drive_folder_download(link)
         except Exception as e:
             print(e)
-            return await edit.edit(f"An error [`{e}`] occured while Downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+            return await error(edit, e, 'downloading') 
         folder.append(output)
     elif 'folders' in link:
         try:
             output = drive_folder_download(link)
         except Exception as e:
             print(e)
-            return await edit.edit(f"An error [`{e}`] occured while Downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+            return await error(edit, e, 'downloading') 
         folder.append(output) 
     elif 'https://drive.google.com/file/' in link:
         id = (link.split("/"))[5]
@@ -46,19 +50,18 @@ async def drive(event, msg):
             file = gdown.download(_link, quiet=True)
         except Exception as e:
             print(e)
-            return await edit.edit(f"An error [`{e}`] occured while Downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+            return await error(edit, e, 'downloading') 
         folder.append(file)
     elif 'https://drive.google.com/uc?id=' in link:
         try:
             file = gdown.download(link, quiet=True)
         except Exception as e:
             print(e)
-            return await edit.edit(f"An error [`{e}`] occured while Downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+            return await error(edit, e, 'downloading') 
         folder.append(file)
-        
-        
-        
-        
+    else:
+        return await edit.edit(f'Link support not added.\n\ncontact [SUPPORT]({SUPPORT_LINK})', link_preview=False)
+    await upload_folder(folder, event, edit) 
         
         
     
