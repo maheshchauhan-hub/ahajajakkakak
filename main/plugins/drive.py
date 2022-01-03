@@ -26,6 +26,7 @@ async def error(event, error, ps):
     return await event.edit(f"An error [`{error}`] occured while {ps}.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)        
     
 async def drive(event, msg):
+    await event.delete()
     folder = []
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
