@@ -54,4 +54,6 @@ async def upload_folder(folder, event, edit):
         except Exception as e:
             print(e)
             return await edit.edit(f"An error [`{e}`] occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+        folder.pop(i)
+        
     
