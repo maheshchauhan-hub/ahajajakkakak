@@ -4,6 +4,7 @@ import datetime
 import os
 from Crypto.Cipher import AES
 from Crypto import Random
+from datetime import datetime as dt
 import glob
 # Request header, not necessary, see website change
 headers = {
@@ -54,4 +55,6 @@ def download_m3u8_video(url):
     video = m3u8.load(url)
     print(video.data)
     download(video.segments, 'tmp', video.keys)
+    file = dt.now().isoformat("_", "seconds") + ".mp4"
     merge_to_mp4(file, 'tmp')
+    return file
