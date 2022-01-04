@@ -13,9 +13,9 @@ from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK
 #---------------------------------------------------------------------------------
 
-video_mimes = ['mp4',
-               'mkv', 
-               'webm']
+video_mimes = ['.mp4',
+               '.mkv', 
+               '.webm']
 
 #attrubutes needed to upload video as streaming
 def attributes(file):
