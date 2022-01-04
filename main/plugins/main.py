@@ -30,7 +30,7 @@ async def d(event):
     await drive(event, msg) 
     
 @Drone.on(events.callbackquery.CallbackQuery(data="upload"))
-async def d(event):
+async def u(event):
     await event.delete()
     button = await event.get_message()
     msg = await button.get_reply_message()
