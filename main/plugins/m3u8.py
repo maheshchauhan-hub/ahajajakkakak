@@ -23,11 +23,7 @@ def download(ts_urls, download_path, keys=[]):
         file_name = ts_url.uri
         print("start download %s" %file_name)
         start = datetime.datetime.now().replace(microsecond=0)
-        try:
-            response = requests.get(file_name, stream=True, verify=False)
-        except Exception as e:
-            print(e)
-            return False
+        response = requests.get(file_name, stream=True, verify=False)
         ts_path = download_path+"/{0}.ts".format(i)
         if decrypt:
             key = keys[i]
