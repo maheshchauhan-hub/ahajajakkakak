@@ -28,7 +28,7 @@ async def u(event):
     elif 'youtu.be' in link:
         return
     elif '.m3u8' in link:
-        await uoload_button(event, 'm3u8')
+        await upload_button(event, 'm3u8')
     else:
         await upload_button(event, 'upload') 
         
