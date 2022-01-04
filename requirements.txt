@@ -14,3 +14,4 @@ heroku3
 gdown
 requests
 yt-dlp
+m3u8
