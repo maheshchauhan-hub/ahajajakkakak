@@ -19,7 +19,6 @@ async def menu(event):
                          Button.inline("SETTINGS.", data="settings")],
                          [
                          Button.url("DEVELOPER", url=f"{DEV}")]])
-    await event.delete()
     
 @Drone.on(events.callbackquery.CallbackQuery(data="info"))
 async def info(event):
