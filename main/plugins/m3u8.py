@@ -1,46 +1,61 @@
-import glob
-from concurrent.futures import ThreadPoolExecutor
 import m3u8
+import requests
+import datetime
 import os
-import requests
-from Crypto.Util.Padding import pad
 from Crypto.Cipher import AES
-import requests
-
+from Crypto import Random
+import glob
+# Request header, not necessary, see website change
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"
 }
 
 
-def download_ts(url, key, i):
-    r = requests.get(url, headers=headers)
-    data = r.content
-    data = AESDecrypt(data, key=key, iv=key)
-    with open(f"tmp/{i:0>5d}.ts", "ab") as f:
-        f.write(data)
-    print(f"\r{i:0>5d}.ts Downloaded", end="  ")
+def download(ts_urls, download_path, keys=[]):
+    if not os.path.exists(download_path):
+        os.mkdir(download_path)
+    decrypt = True
+    if len(keys == 0) or keys[0] is None:  # m3u8 will get [None] if not key or []
+        decrypt = False
 
-def AESDecrypt(cipher_text, key, iv):
-    cipher_text = pad(data_to_pad=cipher_text, block_size=AES.block_size)
-    aes = AES.new(key=key, mode=AES.MODE_CBC, iv=key)
-    cipher_text = aes.decrypt(cipher_text)
-    return cipher_text
-  
-def download_m3u8_video(url, save_name, max_workers=10):
-    if not os.path.exists("tmp"):
-        os.mkdir('tmp')
-    playlist = m3u8.load(uri=url, headers=headers)
-    key = requests.get(playlist.keys[-1].uri, headers=headers).content
+    for i in range(len(ts_urls)):
+        ts_url = ts_urls[i]
+        file_name = ts_url.uri
+        print("start download %s" %file_name)
+        start = datetime.datetime.now().replace(microsecond=0)
+        try:
+            response = requests.get(file_name, stream=True, verify=False)
+        except Exception as e:
+            print(e)
+            return False
+        ts_path = download_path+"/{0}.ts".format(i)
+        if decrypt:
+            key = keys[i]
+            iv = Random.new().read(AES.block_size)
+            cryptor = AES.new(key.encode('utf-8'), AES.MODE_CBC)
 
-    with ThreadPoolExecutor(max_workers=max_workers) as pool:
-        for i, seg in enumerate(playlist.segments):
-            pool.submit(download_ts, seg.absolute_uri, key, i)
+        with open(ts_path,"wb+") as file:
+            for chunk in response.iter_content(chunk_size=1024):
+                if chunk:
+                    if decrypt:
+                        file.write(cryptor.decrypt(chunk))
+                    else:
+                        file.write(chunk)
 
-    with open(save_name, 'wb') as fw:
-        files = glob.glob('tmp/*.ts')
+        end = datetime.datetime.now().replace(microsecond=0)
+        print("total time: %s"%(end-start))
+
+def merge_to_mp4(dest_file, source_path, delete=False):
+    with open(dest_file, 'wb') as fw:
+        files = glob.glob(source_path + '/*.ts')
         for file in files:
             with open(file, 'rb') as fr:
                 fw.write(fr.read())
-                print(f'\r{file}Merged!Total:{len(files)}', end="     ")
-            os.remove(file)
+            if delete:
+                os.remove(file)
 
+def download_m3u8_video(url):                
+    video = m3u8.load(url)
+    print(video.data)
+    download(video.segments, 'tmp', video.keys)
+    merge_to_mp4(file, 'tmp')
