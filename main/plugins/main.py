@@ -6,7 +6,7 @@ from telethon import events, Button
 from main.plugins.drive import drive
 from main.plugins.youtubedl import ytdl
 from main.plugins.requests import weburl
-from main.plugins.utils.utils import get_link
+from main.plugins.utils.utils import get_link, upload_file
 from LOCAL.localisation import link_animated, SUPPORT_LINK
 
 async def upload_button(event, data):
@@ -52,7 +52,8 @@ async def d(event):
     except Exception as e:
         await ds.delete()
         return await edit.edit(f'An error `[{e}]` occured!\n\nContact [SUPPORT]({SUPPORT_LINK})', link_preview=False) 
-       
+    await ds.delete()
+    await upload_file(file, event, edit) 
               
                     
                     
