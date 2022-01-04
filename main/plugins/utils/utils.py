@@ -6,7 +6,7 @@ import os
 import time
 import heroku3
 import requests
-from ... import BOT_UN, MONGODB_URI
+from ... import Drone, BOT_UN, MONGODB_URI
 from main.Database.database import Database
 from telethon import events
 from decouple import config
