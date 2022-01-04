@@ -11,6 +11,9 @@ from main.plugins.utils.utils import get_link, upload_file, force_sub
 from main.plugins.m3u8 import download_m3u8_video
 from LOCAL.localisation import link_animated, down_sticker, SUPPORT_LINK, forcesubtext
 
+process1 = []
+timer = []
+
 async def upload_button(event, data):
     await event.client.send_message(event.chat_id, file=link_animated, reply_to=event.id, buttons=[[Button.inline("Upload.", data=data)]])
 
@@ -37,13 +40,30 @@ async def u(event):
         
 @Drone.on(events.callbackquery.CallbackQuery(data="drive"))
 async def d(event):
+    if f'{event.sender_id}' in process1:
+        index = process1.index(f'{event.sender_id}')
+        last = timer[int(index)]
+        present = time.time()
+        return await event.answer(f"You have to wait {120-round(present-float(last))} seconds more to start a new process!", alert=True)
     button = await event.get_message()
     msg = await button.get_reply_message()
     await event.delete()
     await drive(event, msg) 
+    now = time.time()
+    timer.append(f'{now}')
+    process1.append(f'{event.sender_id}')
+    await event.client.send_message(event.chat_id, 'You can start a new process again after 2 minutes.')
+    await asyncio.sleep(120)
+    timer.pop(int(timer.index(f'{now}')))
+    process1.pop(int(process1.index(f'{event.sender_id}')))
     
 @Drone.on(events.callbackquery.CallbackQuery(data="upload"))
 async def u(event):
+    if f'{event.sender_id}' in process1:
+        index = process1.index(f'{event.sender_id}')
+        last = timer[int(index)]
+        present = time.time()
+        return await event.answer(f"You have to wait {120-round(present-float(last))} seconds more to start a new process!", alert=True)
     button = await event.get_message()
     msg = await button.get_reply_message()
     await event.delete()
@@ -73,9 +93,22 @@ async def u(event):
         return await edit.edit(f'An error `[{e}]` occured!\n\nContact [SUPPORT]({SUPPORT_LINK})', link_preview=False) 
     await ds.delete()
     await upload_file(file, event, edit) 
-              
+    now = time.time()
+    timer.append(f'{now}')
+    process1.append(f'{event.sender_id}')
+    await event.client.send_message(event.chat_id, 'You can start a new process again after 2 minutes.')
+    await asyncio.sleep(120)
+    timer.pop(int(timer.index(f'{now}')))
+    process1.pop(int(process1.index(f'{event.sender_id}')))
+    
+                
 @Drone.on(events.callbackquery.CallbackQuery(data="m3u8"))
-async def u8(event):         
+async def u8(event):
+    if f'{event.sender_id}' in process1:
+        index = process1.index(f'{event.sender_id}')
+        last = timer[int(index)]
+        present = time.time()
+        return await event.answer(f"You have to wait {120-round(present-float(last))} seconds more to start a new process!", alert=True)
     button = await event.get_message()
     msg = await button.get_reply_message()
     await event.delete()
@@ -109,7 +142,14 @@ async def u8(event):
         await edit.edit(f'An error `[{e}]` occured!\n\nContact [SUPPORT]({SUPPORT_LINK})', link_preview=False) 
     await ds.delete()
     await upload_file(file, event, edit) 
-              
+    now = time.time()
+    timer.append(f'{now}')
+    process1.append(f'{event.sender_id}')
+    await event.client.send_message(event.chat_id, 'You can start a new process again after 2 minutes.')
+    await asyncio.sleep(120)
+    timer.pop(int(timer.index(f'{now}')))
+    process1.pop(int(process1.index(f'{event.sender_id}')))
+    
                 
             
                     
