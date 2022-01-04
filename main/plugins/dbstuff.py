@@ -6,9 +6,6 @@ from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
 from telethon import events 
 from decouple import config
 from main.Database.database import Database
-from telethon.errors.rpcerrorlist import UserNotParticipantError
-from telethon.tl.functions.channels import GetParticipantRequest
-from telegraph import upload_file
 
 def mention(name, id):
     return f'[{name}](tg://user?id={id})'
