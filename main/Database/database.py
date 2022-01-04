@@ -1,3 +1,5 @@
+#(c) Shrimadav-uk for base
+
 #Tg:ChauhanMahesh/DroneBots
 #Github.com/vasusen-code
 import datetime
@@ -13,9 +15,9 @@ class Database:
     def __init__(self, MONGODB_URI, SESSION_NAME):
         self._client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URI)
         self.db = self._client[SESSION_NAME]
-        self.col = self.db.uploader
+        self.col = self.db.users
 
- #collection handling---------------------------------------------------------
+#collection handling---------------------------------------------------------
 
     def new_user(self, id):
         return dict(id=id, banned=False, link=None)
