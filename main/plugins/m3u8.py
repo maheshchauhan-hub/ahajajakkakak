@@ -12,7 +12,7 @@ headers = {
 }
 
 
-def download(ts_urls, download_path, keys=[]):
+def download(ts_urls, download_path, keys):
     if not os.path.exists(download_path):
         os.mkdir(download_path)
     decrypt = True
@@ -53,7 +53,8 @@ def merge_to_mp4(dest_file, source_path, delete=False):
 
 def download_m3u8_video(url, path):                
     video = m3u8.load(url)
-    print(video.data)
-    download(video.segments, 'tmp', video.keys)
+    keys = []
+    keys.append(video.keys)
+    download(video.segments, 'tmp', keys)
     merge_to_mp4(path, 'tmp')
     
