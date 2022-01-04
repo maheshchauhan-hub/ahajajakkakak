@@ -13,7 +13,7 @@ async def menu(event):
     await event.edit("**📑MENU.**",
                     buttons=[[
                          Button.inline("info.", data="info"),
-                         Button.inline("'Help", data="help")],
+                         Button.inline("Help", data="help")],
                          [
                          Button.inline("NOTICE.", data="notice"),
                          Button.inline("SETTINGS.", data="settings")],
@@ -37,7 +37,7 @@ async def help(event):
                          [
                          Button.inline("Menu.", data="menu")]])
     
-@Drone.on(events.callbackquery.CallbackQuery(data="help"))
+@Drone.on(events.callbackquery.CallbackQuery(data="settings"))
 async def help(event):
     await event.edit('**🛠SETTINGS.**',
                     buttons=[[
