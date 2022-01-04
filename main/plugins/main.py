@@ -7,7 +7,7 @@ from main.plugins.drive import drive
 from main.plugins.youtubedl import ytdl
 from main.plugins.requests import weburl
 from main.plugins.utils.utils import get_link, upload_file
-from LOCAL.localisation import link_animated, SUPPORT_LINK
+from LOCAL.localisation import link_animated, down_sticker SUPPORT_LINK
 
 async def upload_button(event, data):
     await event.client.send_message(event.chat_id, file=link_animated, reply_to=event.id, buttons=[[Button.inline("Upload.", data=data)]])
