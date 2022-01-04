@@ -20,11 +20,6 @@ def download_ts(url, key, i):
         f.write(data)
     print(f"\r{i:0>5d}.ts Downloaded", end="  ")
 
-def get_real_url(url):
-    playlist = m3u8.load(uri=url, headers=headers)
-    for x in playlist.playlists:
-        return x.uri
-    
 def AESDecrypt(cipher_text, key, iv):
     cipher_text = pad(data_to_pad=cipher_text, block_size=AES.block_size)
     aes = AES.new(key=key, mode=AES.MODE_CBC, iv=key)
@@ -34,9 +29,7 @@ def AESDecrypt(cipher_text, key, iv):
 def download_m3u8_video(url, save_name, max_workers=10):
     if not os.path.exists("tmp"):
         os.mkdir('tmp')
-
-    real_url = get_real_url(url)
-    playlist = m3u8.load(uri=real_url, headers=headers)
+    playlist = m3u8.load(uri=url, headers=headers)
     key = requests.get(playlist.keys[-1].uri, headers=headers).content
 
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
