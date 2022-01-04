@@ -25,11 +25,14 @@ db = Database(MONGODB_URI, 'uploaderpro')
 #uploading---------------------------------------------------------------------------------
 
 async def max_size_error(file, edit):
-    size = os.path.getsize(file)/1000000
-    if size > 1999:
-        await edit.edit("Files greater than 2Gb cannot be uploaded to telegram!")
-        os.remove(file)
-        return
+    try:
+        size = os.path.getsize(file)/1000000
+        if size > 1999:
+            await edit.edit("Files greater than 2Gb cannot be uploaded to telegram!")
+            os.remove(file)
+            return
+    except Exception:
+        await edit.edit("Internal Error, Your link may be unsupported.")
     
 async def thumb(id):
     db = Database(MONGODB_URI, 'uploaderpro')
