@@ -5,6 +5,7 @@ import re
 import os
 import time
 import heroku3
+import requests
 from ... import BOT_UN, MONGODB_URI
 from main.Database.database import Database
 from telethon import events
@@ -15,9 +16,19 @@ from ethon.pyutils import file_extension
 from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK
 
-db = Database(MONGODB_URI, 'uploaderpro')
-
 #uploading---------------------------------------------------------------------------------
+
+async def thumb():
+    db = Database(MONGODB_URI, 'videoconvertor')
+    T = await db.get_thumb(event.sender_id)
+    if T is not None:
+        ext = T.split("/")[4]
+        r = requests.get(T, allow_redirects=True)
+        path = dt.now().isoformat("_", "seconds") + ext
+        open(path , 'wb').write(r.content)
+        return path
+    else:
+        return None
 
 video_mimes = ['.mp4',
                '.mkv', 
@@ -34,17 +45,19 @@ def attributes(file):
 
 #uploads video in streaming form
 async def upload_video(file, event, edit):
+    T = await thumb()
     text = f'{file}\n\n**UPLOADED by:** {BOT_UN}'
     Drone = event.client
     try:
         x = attributes(file)
         uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE**')
-        await Drone.send_file(event.chat_id, uploader, caption=text, attributes=x, force_document=False)
+        await Drone.send_file(event.chat_id, uploader, caption=text, thumb=T, attributes=x, force_document=False)
         os.remove(file)
     except Exception:
         False    
 
 async def upload_file(file, event, edit):
+    T = await thumb()
     text = f'{file}\n\n**UPLOADED by:** {BOT_UN}'
     Drone = event.client
     try:
@@ -53,11 +66,11 @@ async def upload_file(file, event, edit):
             result = await upload_video(file, event, edit) 
             if result is False:
                 uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE:**')
-                await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
+                await Drone.send_file(event.chat_id, uploader, caption=text, thumb=T, force_document=True)
                 os.remove(file)
         else:
             uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE:**')
-            await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
+            await Drone.send_file(event.chat_id, uploader, caption=text,thumb=T, force_document=True)
             os.remove(file)
     except Exception as e:
         return await edit.edit(f"An error `[{e}]` occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
@@ -66,6 +79,7 @@ async def upload_file(file, event, edit):
 #uploads a folder 
 #Note:Here folder is a list of all contents in a folder
 async def upload_folder(folder, event, edit):
+    T = await thumb()
     Drone = event.client
     index = len(folder)
     for i in range(int(index)):
@@ -77,11 +91,11 @@ async def upload_folder(folder, event, edit):
                 result = await upload_video(file, event, edit) 
                 if result is False:
                     uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE:**')
-                    await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
+                    await Drone.send_file(event.chat_id, uploader, caption=text, thumb=T, force_document=True)
                     os.remove(file)
             else:
                 uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE:**')
-                await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
+                await Drone.send_file(event.chat_id, uploader, caption=text, thumb=T, force_document=True)
                 os.remove(file)
         except Exception as e:
             print(e)
