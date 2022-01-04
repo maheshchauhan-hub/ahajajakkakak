@@ -6,6 +6,7 @@ import os
 import time
 import heroku3
 import requests
+from datetime import datetime as dt
 from ... import Drone, BOT_UN, MONGODB_URI
 from main.Database.database import Database
 from telethon import events
@@ -23,9 +24,9 @@ db = Database(MONGODB_URI, 'videoconvertor')
 
 #uploading---------------------------------------------------------------------------------
 
-async def thumb():
+async def thumb(id):
     db = Database(MONGODB_URI, 'videoconvertor')
-    T = await db.get_thumb(event.sender_id)
+    T = await db.get_thumb(id)
     if T is not None:
         ext = T.split("/")[4]
         r = requests.get(T, allow_redirects=True)
@@ -50,7 +51,7 @@ def attributes(file):
 
 #uploads video in streaming form
 async def upload_video(file, event, edit):
-    T = await thumb()
+    T = await thumb(event.sender_id)
     text = f'{file}\n\n**UPLOADED by:** {BOT_UN}'
     Drone = event.client
     try:
@@ -62,7 +63,7 @@ async def upload_video(file, event, edit):
         False    
 
 async def upload_file(file, event, edit):
-    T = await thumb()
+    T = await thumb(event.sender_id)
     text = f'{file}\n\n**UPLOADED by:** {BOT_UN}'
     Drone = event.client
     try:
@@ -84,7 +85,7 @@ async def upload_file(file, event, edit):
 #uploads a folder 
 #Note:Here folder is a list of all contents in a folder
 async def upload_folder(folder, event, edit):
-    T = await thumb()
+    T = await thumb(event.sender_id)
     Drone = event.client
     index = len(folder)
     for i in range(int(index)):
