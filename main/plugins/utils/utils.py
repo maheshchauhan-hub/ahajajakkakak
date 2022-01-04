@@ -24,6 +24,13 @@ db = Database(MONGODB_URI, 'videoconvertor')
 
 #uploading---------------------------------------------------------------------------------
 
+async def max_size_error(edit, file):
+    size = os.path.getsize(file)/1000000
+    if size > 1999:
+        await edit.edit("Files greater than 2Gb cannot be uploaded to telegram!")
+        os.remove(file)
+        return
+    
 async def thumb(id):
     db = Database(MONGODB_URI, 'videoconvertor')
     T = await db.get_thumb(id)
@@ -51,6 +58,7 @@ def attributes(file):
 
 #uploads video in streaming form
 async def upload_video(file, event, edit):
+    await max_size_error(file, edit) 
     T = await thumb(event.sender_id)
     text = f'{file}\n\n**UPLOADED by:** {BOT_UN}'
     Drone = event.client
@@ -63,6 +71,7 @@ async def upload_video(file, event, edit):
         False    
 
 async def upload_file(file, event, edit):
+    await max_size_error(file, edit) 
     T = await thumb(event.sender_id)
     text = f'{file}\n\n**UPLOADED by:** {BOT_UN}'
     Drone = event.client
@@ -91,6 +100,7 @@ async def upload_folder(folder, event, edit):
     for i in range(int(index)):
         try:
             file = folder[int(i)]
+            await max_size_error(file, edit) 
             text = f'{file}\n\n**UPLOADED by:** {BOT_UN}'
             extension = file_extension(file)
             if extension in video_mimes:
