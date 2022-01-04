@@ -24,7 +24,6 @@ class YTLogger:
 ydlp_opts={'logger': YTLogger(),
           'outtmpl': '%(title)s.%(ext)s',
           'no_warnings': True, 
-          'progress_hooks': [my_hook],
           'quiet': True }
 
 
