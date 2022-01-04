@@ -83,7 +83,7 @@ async def u8(event):
         link = get_link(msg.text)
         try:
             file = datetime.now().isoformat("_", "seconds") + ".mp4"
-            download_m3u8_video(link file) 
+            download_m3u8_video(link, file) 
         except Exception as e:
             print(e)
             try:
