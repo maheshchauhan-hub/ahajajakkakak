@@ -84,7 +84,7 @@ async def u8(event):
         try:
             file = datetime.now().isoformat("_", "seconds") + ".mp4"
             download_m3u8_video(link, file) 
-        except Excpetion as e:
+        except Exception as e:
             print(e)
             try:
                 x = weburl(link)
@@ -102,7 +102,7 @@ async def u8(event):
                 except Exception:
                     await ds.delete()
                     return await edit.edit('Link Not supported.')
-    except Excpetion as e:
+    except Exception as e:
         await edit.edit(f'An error `[{e}]` occured!\n\nContact [SUPPORT]({SUPPORT_LINK})', link_preview=False) 
     await ds.delete()
     await upload_file(file, event, edit) 
