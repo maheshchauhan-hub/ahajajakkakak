@@ -16,7 +16,7 @@ def download(ts_urls, download_path, keys):
     if not os.path.exists(download_path):
         os.mkdir(download_path)
     decrypt = True
-    if len(keys == 0) or keys[0] is None:  # m3u8 will get [None] if not key or []
+    if len(keys) == 0 or keys[0] is None:  # m3u8 will get [None] if not key or []
         decrypt = False
 
     for i in range(len(ts_urls)):
@@ -55,10 +55,8 @@ def download_m3u8_video(url, path):
     video = m3u8.load(url)
     keys = []
     print(video.keys)
-    keys.append(video.keys)
     segments = []
     segments.append(video.segments)
-    print(video.segments)
     download(segments, 'tmp', keys)
     merge_to_mp4(path, 'tmp')
     
