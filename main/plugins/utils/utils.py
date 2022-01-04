@@ -15,7 +15,7 @@ from telethon.tl.types import DocumentAttributeVideo
 from ethon.pyutils import file_extension
 from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK
-from telegraph import upload_file
+from telegraph import upload_file as uf
 
 db = Database(MONGODB_URI, 'videoconvertor')
 
@@ -125,7 +125,7 @@ async def set_thumbnail(event, img):
     edit = await event.client.send_message(event.chat_id, 'Trying to process.')
     try:
         path = await event.client.download_media(img)
-        meta = upload_file(path)
+        meta = uf(path)
         link = f'https://telegra.ph{meta[0]}'
     except Exception as e:
         print(e)
