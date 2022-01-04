@@ -22,7 +22,6 @@ def download(ts_urls, download_path, keys):
     for i in range(len(ts_urls)):
         ts_url = ts_urls[i]
         file_name = ts_url.uri
-        print("start download %s" %file_name)
         start = datetime.datetime.now().replace(microsecond=0)
         response = requests.get(file_name, stream=True, verify=False)
         ts_path = download_path+"/{0}.ts".format(i)
@@ -42,7 +41,7 @@ def download(ts_urls, download_path, keys):
         end = datetime.datetime.now().replace(microsecond=0)
         print("total time: %s"%(end-start))
 
-def merge_to_mp4(dest_file, source_path, delete=False):
+def merge_to_mp4(dest_file, source_path, delete=True):
     with open(dest_file, 'wb') as fw:
         files = glob.glob(source_path + '/*.ts')
         for file in files:
@@ -50,7 +49,7 @@ def merge_to_mp4(dest_file, source_path, delete=False):
                 fw.write(fr.read())
             if delete:
                 os.remove(file)
-
+       
 def download_m3u8_video(url, path):                
     video = m3u8.load(url)
     keys = []
