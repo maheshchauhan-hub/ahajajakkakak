@@ -13,7 +13,7 @@ class Database:
     def __init__(self, MONGODB_URI, SESSION_NAME):
         self._client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URI)
         self.db = self._client[SESSION_NAME]
-        self.col = self.db.users
+        self.col = self.db.uploader
 
  #collection handling---------------------------------------------------------
 
