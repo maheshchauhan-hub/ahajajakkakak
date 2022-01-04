@@ -8,12 +8,16 @@ import heroku3
 from ... import BOT_UN, MONGODB_URI
 from main.Database.database import Database
 from telethon import events
+from decouple import config
 from ethon.telefunc import fast_upload
 from telethon.tl.types import DocumentAttributeVideo
 from ethon.pyutils import file_extension
 from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK
-#---------------------------------------------------------------------------------
+
+db = Database(MONGODB_URI, 'uploaderpro')
+
+#uploading---------------------------------------------------------------------------------
 
 video_mimes = ['.mp4',
                '.mkv', 
