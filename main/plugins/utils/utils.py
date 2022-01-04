@@ -28,6 +28,7 @@ def attributes(file):
 
 #uploads video in streaming form
 async def upload_video(file, event, edit):
+    Drone = event.client
     try:
         x = attributes(file)
         uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE**')
@@ -37,6 +38,7 @@ async def upload_video(file, event, edit):
         False    
 
 async def upload_file(file, event, edit):
+    Drone = event.client
     try:
         extension = file_extension(file)
         if extension in video_mimes:
