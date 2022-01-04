@@ -2,7 +2,6 @@ import requests
 import re
 
 #Get filename from content-disposition
-   
 def get_filename_from_cd(cd):
     if not cd:
         return None
