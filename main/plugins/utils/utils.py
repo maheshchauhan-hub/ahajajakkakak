@@ -41,9 +41,9 @@ async def upload_file(file, event, edit):
         extension = file_extension(file)
         if extension in video_mimes:
             result = await upload_video(file, event, edit) 
-                if result is False:
-                    uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE:**')
-                    await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
+            if result is False:
+                uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE:**')
+                await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
         else:
             uploader = await fast_upload(file, file, time.time(), event.client, edit, f'**UPLOADING FILE:**')
             await Drone.send_file(event.chat_id, uploader, caption=text, force_document=True)
