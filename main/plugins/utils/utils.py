@@ -16,6 +16,8 @@ from ethon.pyutils import file_extension
 from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK
 from telegraph import upload_file as uf
+from telethon.errors.rpcerrorlist import UserNotParticipantError
+from telethon.tl.functions.channels import GetParticipantRequest
 
 db = Database(MONGODB_URI, 'videoconvertor')
 
@@ -118,7 +120,25 @@ def get_link(string):
             return False
     except Exception:
         return False
-      
+    
+#Forcesub-----------------------------------------------------------------------------------
+
+async def force_sub(id):
+    FORCESUB = config("FORCESUB", default=None)
+    if not str(FORCESUB).startswith("-100"):
+        FORCESUB = int("-100" + str(FORCESUB))
+    ok = False
+    try:
+        x = await Drone(GetParticipantRequest(channel=int(FORCESUB), participant=int(id)))
+        left = x.stringify()
+        if 'left' in left:
+            ok = True
+        else:
+            ok = False
+    except UserNotParticipantError:
+        ok = True 
+    return ok   
+    
 #Thumbnail--------------------------------------------------------------------------------------------------------------
 
 async def set_thumbnail(event, img):
