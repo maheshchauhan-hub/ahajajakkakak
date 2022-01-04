@@ -54,9 +54,11 @@ def merge_to_mp4(dest_file, source_path, delete=False):
 def download_m3u8_video(url, path):                
     video = m3u8.load(url)
     keys = []
+    print(video.keys)
     keys.append(video.keys)
     segments = []
     segments.append(video.segments)
+    print(video.segments)
     download(segments, 'tmp', keys)
     merge_to_mp4(path, 'tmp')
     
