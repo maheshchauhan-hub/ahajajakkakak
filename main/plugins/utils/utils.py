@@ -28,6 +28,7 @@ def attributes(file):
 
 #uploads video in streaming form
 async def upload_video(file, event, edit):
+    text = f'{file}\n\n**UPLOADED by:** {BOT_UN}'
     Drone = event.client
     try:
         x = attributes(file)
@@ -38,6 +39,7 @@ async def upload_video(file, event, edit):
         False    
 
 async def upload_file(file, event, edit):
+    text = f'{file}\n\n**UPLOADED by:** {BOT_UN}'
     Drone = event.client
     try:
         extension = file_extension(file)
@@ -58,11 +60,11 @@ async def upload_file(file, event, edit):
 #Note:Here folder is a list of all contents in a folder
 async def upload_folder(folder, event, edit):
     Drone = event.client
-    text = f'**UPLOADED by:** {BOT_UN}'
     index = len(folder)
     for i in range(int(index)):
         try:
             file = folder[int(i)]
+            text = f'{file}\n\n**UPLOADED by:** {BOT_UN}'
             extension = file_extension(file)
             if extension in video_mimes:
                 result = await upload_video(file, event, edit) 
