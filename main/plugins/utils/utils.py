@@ -20,7 +20,7 @@ from telegraph import upload_file as uf
 from telethon.errors.rpcerrorlist import UserNotParticipantError
 from telethon.tl.functions.channels import GetParticipantRequest
 
-db = Database(MONGODB_URI, 'videoconvertor')
+db = Database(MONGODB_URI, 'uploaderpro')
 
 #uploading---------------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ async def max_size_error(edit, file):
         return
     
 async def thumb(id):
-    db = Database(MONGODB_URI, 'videoconvertor')
+    db = Database(MONGODB_URI, 'uploaderpro')
     T = await db.get_thumb(id)
     if T is not None:
         ext = T.split("/")[4]
