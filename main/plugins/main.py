@@ -39,16 +39,15 @@ async def u(event):
     file = None
     try:
         link = get_link(msg.text)
-        try:
-           x = weburl(link)
-           if x is None:
-               try:
-                   file = ytdl(link)
-               except DownloadError:
-                   await ds.delete()
-                   return await edit.edit('Link Not supported.')
-           else:
-               file = x
+        x = weburl(link)
+        if x is None:
+            try:
+                file = ytdl(link)
+            except DownloadError:
+                await ds.delete()
+                return await edit.edit('Link Not supported.')
+        else:
+            file = x
     except Exception as e:
         await ds.delete()
         return await edit.edit(f'An error `[{e}]` occured!\n\nContact [SUPPORT]({SUPPORT_LINK})', link_preview=False) 
