@@ -22,9 +22,9 @@ def download_ts(url, key, i):
 
 def get_real_url(url):
     playlist = m3u8.load(uri=url, headers=headers)
-    return playlist.playlists[0].absolute_uri
-
-
+    for x in playlist.playlists:
+        return x.uri
+    
 def AESDecrypt(cipher_text, key, iv):
     cipher_text = pad(data_to_pad=cipher_text, block_size=AES.block_size)
     aes = AES.new(key=key, mode=AES.MODE_CBC, iv=key)
