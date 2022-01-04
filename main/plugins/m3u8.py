@@ -51,10 +51,9 @@ def merge_to_mp4(dest_file, source_path, delete=False):
             if delete:
                 os.remove(file)
 
-def download_m3u8_video(url):                
+def download_m3u8_video(url, path):                
     video = m3u8.load(url)
     print(video.data)
     download(video.segments, 'tmp', video.keys)
-    file = dt.now().isoformat("_", "seconds") + ".mp4"
-    merge_to_mp4(file, 'tmp')
-    return file
+    merge_to_mp4(path, 'tmp')
+    
