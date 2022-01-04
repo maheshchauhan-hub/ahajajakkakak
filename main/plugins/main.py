@@ -19,6 +19,12 @@ async def u(event):
         return
     if 'drive.google.com' in link: 
         await upload_button(event, 'drive') 
+    elif 'playlist' in link:
+        return
+    elif 'youtube' in link:
+        return
+    elif 'youtu.be' in link:
+        return
     else:
         await upload_button(event, 'upload') 
         
