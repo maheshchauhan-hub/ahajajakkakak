@@ -15,6 +15,9 @@ from telethon.tl.types import DocumentAttributeVideo
 from ethon.pyutils import file_extension
 from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK
+from telegraph import upload_file
+
+db = Database(MONGODB_URI, 'videoconvertor')
 
 #uploading---------------------------------------------------------------------------------
 
