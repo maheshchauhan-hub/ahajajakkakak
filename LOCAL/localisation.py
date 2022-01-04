@@ -3,15 +3,13 @@
 
 START_TEXT = "Send me any link to begin."
 
-FORCE_SUB_TEXT = "In order to use this bot, you've to join my parent channel."
+forcesubtext = "In order to use this bot, you've to join my parent channel @DroneBots."
 
 CHANNEL_LINK = "https://t.me/DroneBots"
 
 SUPPORT_LINK = "https://t.me/TeamDrone"
 
 info_text = "This bot is developed by @MaheshChauhan\n\nWritten in python library TELETHON.\n\nBot by : @DroneBots\nSupport : @TeamDrone\n\nV1.1"   
-
-help_text = "Send me any link to Upload it's file to telegram.\n\nI can Upload from:\nDrive\nMega.nz(soon)\nWebPage Urls\nYT_dlp supported sites"
 
 DEV = "https://t.me/MaheshChauhan"
 
