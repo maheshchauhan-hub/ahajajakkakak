@@ -1,6 +1,8 @@
 #tg:ChauhanMahesh/DroneBots
 #github.com/vasusen-code
 
+import os
+import time
 from .. import Drone
 from datetime import datetime
 from telethon import events, Button
