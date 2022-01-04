@@ -7,9 +7,9 @@ from telethon import events, Button
 from main.plugins.drive import drive
 from main.plugins.youtubedl import ytdl
 from main.plugins.requests import weburl
-from main.plugins.utils.utils import get_link, upload_file
+from main.plugins.utils.utils import get_link, upload_file, force_sub
 from main.plugins.m3u8 import download_m3u8_video
-from LOCAL.localisation import link_animated, down_sticker, SUPPORT_LINK
+from LOCAL.localisation import link_animated, down_sticker, SUPPORT_LINK, forcesubtext
 
 async def upload_button(event, data):
     await event.client.send_message(event.chat_id, file=link_animated, reply_to=event.id, buttons=[[Button.inline("Upload.", data=data)]])
@@ -19,6 +19,9 @@ async def u(event):
     link = get_link(event.text)
     if link is False:
         return
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     if 'drive.google.com' in link: 
         await upload_button(event, 'drive') 
     elif 'playlist' in link:
