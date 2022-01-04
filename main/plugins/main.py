@@ -3,6 +3,7 @@
 
 import os
 import time
+import asyncio
 from .. import Drone
 from datetime import datetime
 from telethon import events, Button
