@@ -60,7 +60,7 @@ async def u(event):
                 file = ytdl(link)
             except Exception:
                 await ds.delete()
-                return await edit.edit('Link Not supported.'
+                return await edit.edit('Link Not supported.')
     except Exception as e:
         await ds.delete()
         return await edit.edit(f'An error `[{e}]` occured!\n\nContact [SUPPORT]({SUPPORT_LINK})', link_preview=False) 
