@@ -6,7 +6,7 @@ from main.plugins.utils.utils import set_thumbnail, rem_thumbnail, heroku_restar
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/start"))
 async def start(event):
-    await event.reply(st)
+    await event.reply(st, buttons=[[Button.inline("Menu.", data="menu")]])
     
 @Drone.on(events.callbackquery.CallbackQuery(data="menu"))
 async def menu(event):
