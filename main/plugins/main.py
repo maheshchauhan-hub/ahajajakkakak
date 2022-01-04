@@ -36,6 +36,8 @@ async def u(event):
         return
     elif 'youtu.be' in link:
         return
+    elif 'herokuapp' in link:
+        return
     elif '.m3u8' in link:
         await upload_button(event, 'm3u8')
     else:
