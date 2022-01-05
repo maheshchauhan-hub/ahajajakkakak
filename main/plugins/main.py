@@ -8,7 +8,7 @@ from .. import Drone
 from datetime import datetime
 from telethon import events, Button
 from main.plugins.drive import drive
-from main.plugins.youtubedl import ytdl
+from main.plugins.youtubedl import ytdl, youtube
 from main.plugins.requests import weburl
 from main.plugins.utils.utils import get_link, upload_file, force_sub
 from main.plugins.m3u8 import download_m3u8_video
@@ -35,9 +35,9 @@ async def u(event):
     elif 'herokuapp' in link:
         return
     elif 'youtube' in link:
-        await upload_button(event, 'ydlm3u8')
+        await upload_button(event, 'yt')
     elif 'youtu.be' in link:
-        await upload_button(event, 'ydlm3u8')
+        await upload_button(event, 'yt')
     elif '.m3u8' in link:
         await upload_button(event, 'm3u8')
     else:
@@ -106,7 +106,7 @@ async def u(event):
     timer.pop(int(timer.index(f'{now}')))
     process1.pop(int(process1.index(f'{event.sender_id}')))
     
-@Drone.on(events.callbackquery.CallbackQuery(data="ydlm3u8"))
+@Drone.on(events.callbackquery.CallbackQuery(data="yt"))
 async def yu8(event):
     if f'{event.sender_id}' in process1:
         index = process1.index(f'{event.sender_id}')
@@ -121,7 +121,7 @@ async def yu8(event):
     file = None
     try:
         link = get_link(msg.text)
-        file = ytdl(link)
+        file = youtube(link)
     except Exception as e:
         await ds.delete()
         return await edit.edit(f'error: `{e}`\n\ncontact [SUPPORT]({SUPPORT_LINK})')
