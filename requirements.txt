@@ -27,6 +27,7 @@ requests
 
 #For yt video download(only)
 pyUltroid
+youtube_dl
 
 #useless, lazy to clean
 m3u8
