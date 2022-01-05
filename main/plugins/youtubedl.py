@@ -2,7 +2,7 @@ import os
 from youtube_dl import YoutubeDL
 
 #For youtube videos download
-def youtube(url, event):    
+def youtube(url):    
     options = {
         "nocheckcertificate": True,
         "geo-bypass": True,
