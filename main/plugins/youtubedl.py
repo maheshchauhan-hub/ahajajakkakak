@@ -38,7 +38,7 @@ def ytdl(url):
 
 #For youtubedownload------------------------------------------------------------------------------------------------
 
-from youtube_dl 
+import youtube_dl 
 
 async def youtube(url):
     options = {
