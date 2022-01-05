@@ -1,12 +1,12 @@
-#github.com/teamultroid
-
-try:
-    from pyUltroid.functions.ytdl import download_yt
-except Exception:
-    pass
+from ethon.pyfunc import bash
 
 #For youtube videos download
 async def youtube(url, event):
+    bash("pip install pyUltroid")
+    try:
+        from pyUltroid.functions.ytdl import download_yt
+    except Exception:
+        pass
     options = {
         "nocheckcertificate": True,
         "geo-bypass": True,
