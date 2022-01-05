@@ -26,7 +26,8 @@ class YTLogger:
 ydlp_opts={'logger': YTLogger(),
           'outtmpl': '%(title)s.%(ext)s',
           'no_warnings': True, 
-          'quiet': True }
+          'quiet': True,
+          'geo-bypass': True}
 
 def ytdl(url):
     with yt_dlp.YoutubeDL(ydlp_opts) as ydl:
