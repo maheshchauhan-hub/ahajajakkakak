@@ -5,9 +5,9 @@ name: Python application
 
 on:
   push:
-    branches: [ Heroku ]
+    branches: [ Workflows ]
   pull_request:
-    branches: [ Heroku ]
+    branches: [ Workflows ]
 
 jobs:
   build:
