@@ -35,9 +35,9 @@ async def u(event):
     elif 'herokuapp' in link:
         return
     elif 'youtube' in link:
-        await upload_button(event, 'yt')
+        return
     elif 'youtu.be' in link:
-        await upload_button(event, 'yt')
+        return
     elif '.m3u8' in link:
         await upload_button(event, 'm3u8')
     else:
@@ -105,7 +105,8 @@ async def u(event):
     await asyncio.sleep(120)
     timer.pop(int(timer.index(f'{now}')))
     process1.pop(int(process1.index(f'{event.sender_id}')))
-    
+ 
+#not in use (slow) 
 @Drone.on(events.callbackquery.CallbackQuery(data="yt"))
 async def yu8(event):
     if f'{event.sender_id}' in process1:
