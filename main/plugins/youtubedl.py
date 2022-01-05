@@ -7,7 +7,6 @@ from youtube_dl import YoutubeDL
 async def youtube(url):
     options = {
         "geo-bypass": True,
-        "nocheckcertificate": True,
         "outtmpl": "%(title)s.%(ext)s",
         "format": "best",
         "quiet": True }
