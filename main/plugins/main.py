@@ -34,6 +34,10 @@ async def u(event):
         return
     elif 'herokuapp' in link:
         return
+    elif 'youtube' in link:
+        await upload_button(event, 'ydlm3u8')
+    elif 'youtu.be' in link:
+        await upload_button(event, 'ydlm3u8')
     elif '.m3u8' in link:
         await upload_button(event, 'm3u8')
     else:
@@ -118,9 +122,9 @@ async def yu8(event):
     try:
         link = get_link(msg.text)
         file = ytdl(link)
-    except Exception:
+    except Exception as e:
         await ds.delete()
-        return await edit.edit('Link Not supported.')
+        return await edit.edit(f'error: `{e}`\n\ncontact [SUPPORT]({SUPPORT_LINK})')
     await ds.delete()
     await upload_file(file, event, edit) 
     now = time.time()
