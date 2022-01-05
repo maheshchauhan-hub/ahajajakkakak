@@ -25,11 +25,6 @@ gdown
 yt-dlp
 requests
 
-#for yt videos(only)
-pyUltroid #idk why but this method is faster despite i tried everything.
-youtube_dl
-youtube-search-python #useless_here
-
 #useless, lazy to clean
 m3u8
 futures
