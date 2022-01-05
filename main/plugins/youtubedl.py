@@ -22,7 +22,6 @@ class YTLogger:
 #----------------------------------------------------------------------------------------------------------
 
 ydlp_opts={'logger': YTLogger(),
-          'format': 'bestaudio/best',
           'outtmpl': '%(title)s.%(ext)s',
           'no_warnings': True, 
           'quiet': True }
