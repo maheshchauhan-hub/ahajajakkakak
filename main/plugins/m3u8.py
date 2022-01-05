@@ -22,7 +22,7 @@ def download(ts_urls, download_path):
         ts_url = ts_urls[i]
         file_name = ts_url.uri
         start = datetime.datetime.now().replace(microsecond=0)
-        response = requests.get(file_name, stream=True, verify=False)
+        response = requests.get(file_name, allow_redirects=True)
         ts_path = download_path+"/{0}.ts".format(i)
         with open(ts_path,"wb+") as file:
             for chunk in response.iter_content(chunk_size=1024):
