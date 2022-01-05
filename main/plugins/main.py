@@ -108,7 +108,7 @@ async def u(event):
     timer.pop(int(timer.index(f'{now}')))
     process1.pop(int(process1.index(f'{event.sender_id}')))
     
-@Drone.on(events.callbackquery.CallbackQuery(data="upload"))
+@Drone.on(events.callbackquery.CallbackQuery(data="ydlm3u8"))
 async def yu8(event):
     if f'{event.sender_id}' in process1:
         index = process1.index(f'{event.sender_id}')
