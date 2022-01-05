@@ -22,7 +22,7 @@ heroku3
 
 #uploading
 gdown
-requests
+youtube_dl
 yt-dlp
 requests
 
