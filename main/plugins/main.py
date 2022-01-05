@@ -8,7 +8,8 @@ from .. import Drone
 from datetime import datetime
 from telethon import events, Button
 from main.plugins.drive import drive
-from main.plugins.youtubedl import ytdl, youtube
+from main.plugins.youtubedl import youtube
+from main.plugins.ytdlp import ytdl
 from main.plugins.requests import weburl
 from main.plugins.utils.utils import get_link, upload_file, force_sub
 from main.plugins.m3u8 import download_m3u8_video
