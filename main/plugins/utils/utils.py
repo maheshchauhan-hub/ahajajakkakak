@@ -46,9 +46,8 @@ async def thumb(id):
     else:
         return None
 
-video_mimes = ['.mp4',
-               '.mkv', 
-               '.webm']
+video_mimes = ['.mp4']
+               
 
 #attrubutes needed to upload video as streaming
 def attributes(file):
