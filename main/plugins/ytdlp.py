@@ -4,7 +4,7 @@
 import yt_dlp
 from yt_dlp import YoutubeDL
 
-#for ytdlp supported sites -------------------------------------------------------------------------------------------
+#for ytdlp supported sites ------------------------------------------------------------------------------------------
 
 #logging
 class YTLogger:
