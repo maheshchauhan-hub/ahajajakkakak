@@ -4,7 +4,7 @@
 import youtube_dl
 from youtube_dl import YoutubeDL 
 
-async def youtube(url):
+def youtube(url):
     options = {
         "geo-bypass": True,
         "outtmpl": "%(title)s.%(ext)s",
