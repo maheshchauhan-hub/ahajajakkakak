@@ -108,7 +108,7 @@ async def u(event):
     process1.pop(int(process1.index(f'{event.sender_id}')))
  
 @Drone.on(events.callbackquery.CallbackQuery(data="yt"))
-async def yu8(event):
+async def yu(event):
     if f'{event.sender_id}' in process1:
         index = process1.index(f'{event.sender_id}')
         last = timer[int(index)]
@@ -116,18 +116,12 @@ async def yu8(event):
         return await event.answer(f"You have to wait {120-round(present-float(last))} seconds more to start a new process!", alert=True)
     button = await event.get_message()
     msg = await button.get_reply_message()
-    await event.delete()
-    ds = await Drone.send_message(event.chat_id, file=down_sticker, reply_to=msg.id)
-    edit = await Drone.send_message(event.chat_id, '**DOWNLOADING**', reply_to=msg.id)
     file = None
     try:
         link = get_link(msg.text)
-        file = youtube(link)
+        await youtube(link, event)
     except Exception as e:
-        await ds.delete()
-        return await edit.edit(f'error: `{e}`\n\ncontact [SUPPORT]({SUPPORT_LINK})')
-    await ds.delete()
-    await upload_file(file, event, edit) 
+        return await event.edit(f'error: `{e}`\n\ncontact [SUPPORT]({SUPPORT_LINK})')
     now = time.time()
     timer.append(f'{now}')
     process1.append(f'{event.sender_id}')
