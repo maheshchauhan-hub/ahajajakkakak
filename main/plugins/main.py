@@ -41,7 +41,7 @@ async def u(event):
     elif 'workers.dev' in link:
         return
     elif '.m3u8' in link:
-        await upload_button(event, 'ydlm3u8')
+        await upload_button(event, 'm3u8')
     else:
         await upload_button(event, 'upload') 
         
