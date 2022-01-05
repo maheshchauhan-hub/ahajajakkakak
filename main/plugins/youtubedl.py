@@ -1,9 +1,9 @@
 from ethon.pyfunc import bash
 
 #For youtube videos download
-async def youtube(url, event):
-    bash("pip install pyUltroid")
+async def youtube(url, event):    
     try:
+        bash("pip install pyUltroid")
         from pyUltroid.functions.ytdl import download_yt
     except Exception:
         pass
