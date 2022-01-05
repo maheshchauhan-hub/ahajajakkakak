@@ -24,8 +24,10 @@ heroku3
 gdown
 requests
 yt-dlp
+requests
+
+#Not in use, lazy to clean
 m3u8
 futures
 pycrypto
 pycryptodome
-requests
