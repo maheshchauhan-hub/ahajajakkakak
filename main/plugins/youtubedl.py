@@ -11,7 +11,7 @@ def youtube(url):
         "outtmpl": "%(title)s.%(ext)s",
         "format": "best",
         "quiet": True }
-        options["postprocessors"] = [{"key": "FFmpegMetadata"}]
+    options["postprocessors"] = [{"key": "FFmpegMetadata"}]
         
     with youtube_dl.YoutubeDL(options) as ydl:
         ydl.download([url])
