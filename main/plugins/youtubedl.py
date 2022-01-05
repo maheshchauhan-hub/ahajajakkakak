@@ -1,6 +1,9 @@
 #github.com/teamultroid
 
-from pyUltroid.functions.ytdl import download_yt
+try:
+    from pyUltroid.functions.ytdl import download_yt
+except Exception:
+    pass
 
 #For youtube videos download
 async def youtube(url, event):
