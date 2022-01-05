@@ -1,6 +1,6 @@
 
 
-"""NOT IN USE"""
+"""USELESS"""
 
 import m3u8
 import requests
@@ -46,4 +46,4 @@ def download_m3u8_video(url, path):
     download(segments, 'tmp')
     merge_to_mp4(path, 'tmp')
     
-"""NOT IN USE"""
+
