@@ -40,8 +40,6 @@ async def u(event):
         return
     elif 'workers.dev' in link:
         return
-    elif '.m3u8' in link:
-        await upload_button(event, 'm3u8')
     else:
         await upload_button(event, 'upload') 
         
@@ -108,7 +106,8 @@ async def u(event):
     timer.pop(int(timer.index(f'{now}')))
     process1.pop(int(process1.index(f'{event.sender_id}')))
     
-                
+ 
+#Not in use
 @Drone.on(events.callbackquery.CallbackQuery(data="m3u8"))
 async def u8(event):
     if f'{event.sender_id}' in process1:
