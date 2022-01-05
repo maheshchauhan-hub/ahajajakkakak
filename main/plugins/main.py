@@ -32,13 +32,7 @@ async def u(event):
         await upload_button(event, 'drive') 
     elif 'playlist' in link:
         return
-    elif 'youtube' in link:
-        return
-    elif 'youtu.be' in link:
-        return
     elif 'herokuapp' in link:
-        return
-    elif 'workers.dev' in link:
         return
     elif '.m3u8' in link:
         await upload_button(event, 'm3u8')
