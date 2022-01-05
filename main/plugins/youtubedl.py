@@ -1,7 +1,9 @@
+#github.com/teamultroid
+
 from pyUltroid.functions.ytdl import download_yt
 
 #For youtube videos download
-def youtube(url, event):
+async def youtube(url, event):
     options = {
         "nocheckcertificate": True,
         "geo-bypass": True,
@@ -9,5 +11,5 @@ def youtube(url, event):
         "format": "best",
         "quiet": True }
     options["postprocessors"] = [{"key": "FFmpegMetadata"}]
-    await download_yt(edit, url, options) 
+    await download_yt(event, url, options) 
     
