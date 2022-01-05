@@ -6,6 +6,7 @@ from youtube_dl import YoutubeDL
 #For youtube videos download
 def youtube(url):
     options = {
+        "nocheckcertificate": True,
         "geo-bypass": True,
         "outtmpl": "%(title)s.%(ext)s",
         "format": "best",
