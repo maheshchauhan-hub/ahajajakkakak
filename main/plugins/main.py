@@ -8,7 +8,6 @@ from .. import Drone
 from datetime import datetime
 from telethon import events, Button
 from main.plugins.drive import drive
-from pyUltroid.functions.ytdl import download_yt
 from main.plugins.ytdlp import ytdl
 from main.plugins.requests import weburl
 from main.plugins.utils.utils import get_link, upload_file, force_sub
@@ -106,36 +105,7 @@ async def u(event):
     await asyncio.sleep(120)
     timer.pop(int(timer.index(f'{now}')))
     process1.pop(int(process1.index(f'{event.sender_id}')))
- 
-@Drone.on(events.callbackquery.CallbackQuery(data="yt"))
-async def yu(event):
-    if f'{event.sender_id}' in process1:
-        index = process1.index(f'{event.sender_id}')
-        last = timer[int(index)]
-        present = time.time()
-        return await event.answer(f"You have to wait {120-round(present-float(last))} seconds more to start a new process!", alert=True)
-    button = await event.get_message()
-    msg = await button.get_reply_message()
-    await event.delete()
-    edit = await Drone.send_message(event.chat_id, '**DOWNLOADING**', reply_to=msg.id)
-    file = None
-    link = get_link(msg.text)
-    options = {
-        "nocheckcertificate": True,
-        "geo-bypass": True,
-        "outtmpl": "%(title)s.%(ext)s",
-        "format": "best",
-        "quiet": True }
-    options["postprocessors"] = [{"key": "FFmpegMetadata"}]
-    await download_yt(edit, url, options) 
-    now = time.time()
-    timer.append(f'{now}')
-    process1.append(f'{event.sender_id}')
-    await event.client.send_message(event.chat_id, 'You can start a new process again after 2 minutes.')
-    await asyncio.sleep(120)
-    timer.pop(int(timer.index(f'{now}')))
-    process1.pop(int(process1.index(f'{event.sender_id}')))
-    
+
 @Drone.on(events.callbackquery.CallbackQuery(data="m3u8"))
 async def u8(event):
     if f'{event.sender_id}' in process1:
