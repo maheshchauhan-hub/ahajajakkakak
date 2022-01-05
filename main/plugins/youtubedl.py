@@ -47,12 +47,11 @@ async def youtube(url):
         "outtmpl": "%(title)s.%(ext)s",
         "format": "best",
         "quiet": True }
-    YTDL(opts).download([url])
-    with yt_dlp.YoutubeDL({}) as ydl:
-        info_dict = ydl.extract_info(url, download=False)
-        video_title = info_dict.get('title', None) 
-        video_ext = info_dict.get('ext', None) 
-        return video_title + '.' + video_ext
+    YTDL(options).download([url])
+    info_dict = YTDL({}).extract_info(url=url, download=False)
+    video_title = info_dict.get('title', None) 
+    video_ext = info_dict.get('ext', None) 
+    return video_title + '.' + video_ext
     
     
     
