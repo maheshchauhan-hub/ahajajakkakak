@@ -22,9 +22,11 @@ heroku3
 
 #uploading
 gdown
-youtube_dl
 yt-dlp
 requests
+
+#For yt video download(only)
+pyUltroid
 
 #useless, lazy to clean
 m3u8
