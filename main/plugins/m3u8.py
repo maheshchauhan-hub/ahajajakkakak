@@ -15,32 +15,19 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"
 }
 
-
-def download(ts_urls, download_path, keys):
+def download(ts_urls, download_path):
     if not os.path.exists(download_path):
         os.mkdir(download_path)
-    decrypt = True
-    if len(keys) == 0 or keys[0] is None:  # m3u8 will get [None] if not key or []
-        decrypt = False
-
     for i in range(len(ts_urls)):
         ts_url = ts_urls[i]
         file_name = ts_url.uri
         start = datetime.datetime.now().replace(microsecond=0)
         response = requests.get(file_name, stream=True, verify=False)
         ts_path = download_path+"/{0}.ts".format(i)
-        if decrypt:
-            key = keys[i]
-            iv = Random.new().read(AES.block_size)
-            cryptor = AES.new(key.encode('utf-8'), AES.MODE_CBC)
-
         with open(ts_path,"wb+") as file:
             for chunk in response.iter_content(chunk_size=1024):
                 if chunk:
-                    if decrypt:
-                        file.write(cryptor.decrypt(chunk))
-                    else:
-                        file.write(chunk)
+                    file.write(chunk)
 
         end = datetime.datetime.now().replace(microsecond=0)
         print("total time: %s"%(end-start))
@@ -56,11 +43,9 @@ def merge_to_mp4(dest_file, source_path, delete=True):
        
 def download_m3u8_video(url, path):                
     video = m3u8.load(url)
-    keys = []
-    print(video.keys)
     segments = []
     segments.append(video.segments)
-    download(segments, 'tmp', keys)
+    download(segments, 'tmp')
     merge_to_mp4(path, 'tmp')
     
 """NOT IN USE"""
