@@ -106,7 +106,6 @@ async def u(event):
     timer.pop(int(timer.index(f'{now}')))
     process1.pop(int(process1.index(f'{event.sender_id}')))
  
-#not in use (slow) 
 @Drone.on(events.callbackquery.CallbackQuery(data="yt"))
 async def yu8(event):
     if f'{event.sender_id}' in process1:
@@ -136,7 +135,6 @@ async def yu8(event):
     timer.pop(int(timer.index(f'{now}')))
     process1.pop(int(process1.index(f'{event.sender_id}')))
     
-#Not in use
 @Drone.on(events.callbackquery.CallbackQuery(data="m3u8"))
 async def u8(event):
     if f'{event.sender_id}' in process1:
