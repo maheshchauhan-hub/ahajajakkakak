@@ -1,23 +1,13 @@
-#tg:MaheshChauhan/DroneBots
-
-import youtube_dl
-from youtube_dl import YoutubeDL 
+from pyUltroid.functions.ytdl import download_yt
 
 #For youtube videos download
-def youtube(url):
+def youtube(url, event):
     options = {
         "nocheckcertificate": True,
         "geo-bypass": True,
-        "outtmpl": "%(title)s.%(ext)s",
+        "outtmpl": "%(id)s.mp4",
         "format": "best",
         "quiet": True }
     options["postprocessors"] = [{"key": "FFmpegMetadata"}]
-        
-    with youtube_dl.YoutubeDL(options) as ydl:
-        ydl.download([url])
-        info_dict = ydl.extract_info(url, download=False)
-        video_title = info_dict.get('title', None) 
-        video_ext = info_dict.get('ext', None) 
-        return video_title + '.' + video_ext
-    
+    await download_yt(edit, url, options) 
     
