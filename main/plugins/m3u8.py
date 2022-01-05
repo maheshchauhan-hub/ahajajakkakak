@@ -6,8 +6,6 @@ import m3u8
 import requests
 import datetime
 import os
-from Crypto.Cipher import AES
-from Crypto import Random
 from datetime import datetime as dt
 import glob
 # Request header, not necessary, see website change
