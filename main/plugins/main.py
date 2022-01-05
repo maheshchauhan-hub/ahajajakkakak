@@ -8,7 +8,7 @@ from .. import Drone
 from datetime import datetime
 from telethon import events, Button
 from main.plugins.drive import drive
-from main.plugins.youtubedl import youtube
+from pyUltroid.functions.ytdl import download_yt
 from main.plugins.ytdlp import ytdl
 from main.plugins.requests import weburl
 from main.plugins.utils.utils import get_link, upload_file, force_sub
@@ -117,17 +117,17 @@ async def yu(event):
     button = await event.get_message()
     msg = await button.get_reply_message()
     await event.delete()
-    ds = await Drone.send_message(event.chat_id, file=down_sticker, reply_to=msg.id)
     edit = await Drone.send_message(event.chat_id, '**DOWNLOADING**', reply_to=msg.id)
     file = None
-    try:
-        link = get_link(msg.text)
-        file = youtube(link)
-    except Exception as e:
-        await ds.delete()
-        return await edit.edit(f'error: `{e}`\n\ncontact [SUPPORT]({SUPPORT_LINK})')
-    await ds.delete()
-    await upload_file(file, event, edit) 
+    link = get_link(msg.text)
+    options = {
+        "nocheckcertificate": True,
+        "geo-bypass": True,
+        "outtmpl": "%(title)s.%(ext)s",
+        "format": "best",
+        "quiet": True }
+    options["postprocessors"] = [{"key": "FFmpegMetadata"}]
+    await download_yt(edit, url, options) 
     now = time.time()
     timer.append(f'{now}')
     process1.append(f'{event.sender_id}')
