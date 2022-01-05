@@ -38,6 +38,8 @@ async def u(event):
         return
     elif 'herokuapp' in link:
         return
+    elif 'workers.dev' in link:
+        return
     elif '.m3u8' in link:
         await upload_button(event, 'm3u8')
     else:
