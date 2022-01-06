@@ -8,12 +8,11 @@ from .. import Drone
 from datetime import datetime
 from telethon import events, Button
 from main.plugins.drive import drive
-from main.plugins.ytdlp import ytdl
-from main.plugins.requests import weburl
+from ethon.extras.uploader import weburl, ytdl, download_from_youtube
 from main.plugins.utils.utils import get_link, upload_file, force_sub
 from main.plugins.m3u8 import download_m3u8_video
 from LOCAL.localisation import link_animated, down_sticker, SUPPORT_LINK, forcesubtext
-from ethon.pyutils import download_from_youtube
+
 
 process1 = []
 timer = []
