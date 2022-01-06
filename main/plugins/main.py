@@ -81,6 +81,7 @@ async def yt(event):
     except Exception as e:
         await ds.delete()
         return await edit.edit(f"error: `{e}`\n\ncontact [SUPPORT]({SUPPORT_LINK})")
+    await ds.delete()
     await upload_file(file, event, edit) 
     now = time.time()
     timer.append(f'{now}')
