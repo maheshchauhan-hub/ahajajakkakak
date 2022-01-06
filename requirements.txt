@@ -23,8 +23,3 @@ heroku3
 #uploading
 gdown
 
-#useless, lazy to clean
-m3u8
-futures
-pycrypto
-pycryptodome
