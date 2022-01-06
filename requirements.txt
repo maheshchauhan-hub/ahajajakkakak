@@ -3,7 +3,7 @@ python-decouple
 
 #telegram-api
 telethon
-ethon==1.0.7
+ethon==1.1.7
 telethon-tgcrypto
 cryptg
 
@@ -22,8 +22,6 @@ heroku3
 
 #uploading
 gdown
-yt-dlp
-requests
 
 #useless, lazy to clean
 m3u8
