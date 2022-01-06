@@ -3,7 +3,7 @@ python-decouple
 
 #telegram-api
 telethon
-ethon==1.2.2
+ethon==1.2.3
 telethon-tgcrypto
 cryptg
 
