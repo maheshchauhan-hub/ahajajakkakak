@@ -3,7 +3,6 @@ python-decouple
 
 #telegram-api
 telethon
-ethon==1.2.7
 telethon-tgcrypto
 cryptg
 
@@ -23,3 +22,5 @@ heroku3
 #uploading
 gdown
 
+#core
+ethon==1.2.7
