@@ -22,5 +22,5 @@ heroku3
 #uploading
 gdown
 
-#core-
+#core
 ethon==1.2.7
