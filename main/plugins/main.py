@@ -74,7 +74,7 @@ async def yt(event):
     file = None
     try:
         link = get_link(msg.text)
-        file = download_from_youtube(link)
+        file = await download_from_youtube(link)
     except Exception as e:
         await ds.delete()
         return await edit.edit(f"error: `{e}`\n\ncontact [SUPPORT]({SUPPORT_LINK})")
@@ -107,7 +107,7 @@ async def u(event):
             x = weburl(link)
             if x is None:
                 try:
-                    file = ytdl(link)
+                    file = await ytdl(link)
                 except Exception:
                     await ds.delete()
                     return await edit.edit('Link Not supported.')
@@ -115,7 +115,7 @@ async def u(event):
                 file = x
         except Exception:
             try:
-                file = ytdl(link)
+                file = await ytdl(link)
             except Exception:
                 await ds.delete()
                 return await edit.edit('Link Not supported.')
